@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome untuk ikon Hapus -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 text-gray-800 p-4 sm:p-10">
+    <div class="max-w-6xl mx-auto">
+      <div
+        class="flex justify-between items-center mb-8 bg-white p-6 rounded-xl shadow-sm"
+      >
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800">
+            Rekap Nilai Quiz Siswa
+          </h1>
+          <p class="text-gray-500 text-sm">
+            Mata Pelajaran PABP - Syu'abul Iman
+          </p>
+        </div>
+        <div class="flex space-x-3">
+          <a
+            href="quiz.html"
+            class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition"
+            >Ke Halaman Quiz</a
+          >
+          <button
+            onclick="clearAllData()"
+            class="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition"
+          >
+            Hapus Semua Data
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr
+                class="bg-gray-800 text-white uppercase text-sm tracking-wide"
+              >
+                <th class="p-4 font-semibold">No</th>
+                <th class="p-4 font-semibold">Waktu Pengerjaan</th>
+                <th class="p-4 font-semibold">Nama Siswa</th>
+                <th class="p-4 font-semibold">Absen</th>
+                <th class="p-4 font-semibold">Kelas</th>
+                <th class="p-4 font-semibold text-center">Skor Akhir</th>
+                <th class="p-4 font-semibold text-center">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="table-body" class="divide-y divide-gray-200">
+              <!-- Data siswa akan muncul disini -->
+            </tbody>
+          </table>
+        </div>
+        <div id="empty-state" class="p-10 text-center text-gray-500 hidden">
+          <i class="fa-solid fa-folder-open text-4xl mb-3 opacity-50"></i>
+          <p>Belum ada siswa yang mengerjakan quiz.</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function loadData() {
+        const tableBody = document.getElementById("table-body");
+        const emptyState = document.getElementById("empty-state");
+        tableBody.innerHTML = "";
+
+        let db = JSON.parse(localStorage.getItem("quizDB")) || [];
+
+        if (db.length === 0) {
+          emptyState.classList.remove("hidden");
+        } else {
+          emptyState.classList.add("hidden");
+
+          // Membalikkan urutan array (yang terbaru di atas)
+          let reversedDb = [...db].reverse();
+
+          reversedDb.forEach((siswa, index) => {
+            // Karena kita membalik array, index aslinya di database utama berbeda.
+            // Rumus index asli: panjangArray - 1 - indexReversed
+            let originalIndex = db.length - 1 - index;
+
+            let badgeColor =
+              siswa.skor >= 70
+                ? "bg-emerald-100 text-emerald-800"
+                : "bg-red-100 text-red-800";
+
+            const row = `
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="p-4">${index + 1}</td>
+                    <td class="p-4 text-sm text-gray-500">${siswa.waktu}</td>
+                    <td class="p-4 font-bold text-gray-700">${siswa.nama}</td>
+                    <td class="p-4">${siswa.absen}</td>
+                    <td class="p-4">${siswa.kelas}</td>
+                    <td class="p-4 text-center">
+                        <span class="px-3 py-1 font-bold rounded-full ${badgeColor}">${siswa.skor}</span>
+                    </td>
+                    <td class="p-4 text-center">
+                        <button onclick="deleteStudent(${originalIndex}, '${siswa.nama}')" class="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-lg transition" title="Hapus Siswa Ini">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+          });
+        }
+      }
+
+      // Fungsi untuk menghapus 1 data siswa spesifik
+      function deleteStudent(index, namaSiswa) {
+        if (
+          confirm(`Yakin ingin menghapus data nilai atas nama "${namaSiswa}"?`)
+        ) {
+          let db = JSON.parse(localStorage.getItem("quizDB")) || [];
+          db.splice(index, 1); // Hapus 1 elemen berdasarkan index aslinya
+          localStorage.setItem("quizDB", JSON.stringify(db)); // Simpan ulang ke Local Storage
+          loadData(); // Muat ulang tabel
+        }
+      }
+
+      // Fungsi untuk menghapus SEMUA data
+      function clearAllData() {
+        if (
+          confirm(
+            "PERINGATAN!\nYakin ingin menghapus seluruh data rekap nilai kuis? Data tidak bisa dikembalikan.",
+          )
+        ) {
+          localStorage.removeItem("quizDB");
+          loadData();
+        }
+      }
+
+      // Panggil fungsi saat halaman dimuat
+      loadData();
+    </script>
+  </body>
+</html>
