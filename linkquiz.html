@@ -54,6 +54,7 @@
 
     <!-- Konten Tautan Quiz -->
     <div class="max-w-2xl mx-auto px-4 w-full flex-grow flex items-center justify-center mt-4">
+      <!-- Padding mobile diperkecil (p-6) agar ada ruang lebih besar untuk gambar -->
       <div class="bg-white p-6 sm:p-12 rounded-2xl shadow-sm border border-gray-100 w-full text-center relative overflow-hidden">
         <!-- Elemen Dekorasi Latar Belakang -->
         <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-50 rounded-full blur-2xl opacity-70"></div>
@@ -67,8 +68,8 @@
             Silakan scan QR Code atau klik tautan di bawah ini untuk diarahkan ke halaman pengisian Quiz PABP materi Syu'abul Iman.
           </p>
 
-          <!-- Menampilkan QR Code (Ukuran Diperbesar Maksimal untuk HP) -->
-          <img src="codequiz.png" alt="QR Code Quiz" class="w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 object-cover mx-auto mb-6 shadow-sm border border-gray-200 rounded-xl p-2 bg-white" />
+          <!-- Menampilkan QR Code (Ukuran Diperbesar Maksimal menyesuaikan layar HP) -->
+          <img src="codequiz.png" alt="QR Code Quiz" class="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[380px] aspect-square object-contain mx-auto mb-6 shadow-sm border border-gray-200 rounded-xl p-3 bg-white" />
 
           <!-- Kotak Link (Berisi link Bitly yang mengarah ke quiz.html) -->
           <div class="bg-gray-50 border border-gray-200 p-4 sm:p-5 rounded-xl mb-8 break-all shadow-inner">
