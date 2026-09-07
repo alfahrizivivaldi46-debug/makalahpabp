@@ -8,7 +8,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Font Arab saja (Times New Roman sudah bawaan sistem) -->
+    <!-- Font Arab -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,53 +16,69 @@
       rel="stylesheet"
     />
 
-    <!-- Custom CSS untuk Format Makalah Resmi -->
+    <!-- Custom CSS untuk Format Makalah Resmi (A4) -->
     <style>
       body {
-        background-color: #f3f4f6;
-        /* Jenis Font: Times New Roman */
+        background-color: #e5e7eb; /* Warna background luar kertas agak gelap agar kertas menonjol */
         font-family: "Times New Roman", Times, serif;
         scroll-behavior: smooth;
         color: #000000;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
       }
 
       .arabic-text {
         font-family: "Amiri", serif;
       }
 
-      .paper-container {
+      /* Class baru untuk Lembaran Kertas A4 Terpisah */
+      .a4-page {
         background-color: white;
-        /* Ukuran Kertas: A4 (21cm x 29.7cm) */
         max-width: 21cm;
-        min-height: 29.7cm;
-        margin: 2rem auto;
-
-        /* Ukuran Font Isi: 12 pt & Spasi: 1,5 */
-        font-size: 12pt;
-        line-height: 1.5;
+        min-height: 29.7cm; /* Tinggi minimal A4 */
+        margin: 0 auto 3rem auto; /* Jarak 3rem antar lembaran kertas */
 
         /* Margin Kertas: Atas 3cm, Kanan 3cm, Bawah 3cm, Kiri 4cm */
         padding: 3cm 3cm 3cm 4cm;
 
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        /* Font Isi: 12 pt & Spasi: 1,5 */
+        font-size: 12pt;
+        line-height: 1.5;
+
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Efek bayangan kertas */
         box-sizing: border-box;
+        position: relative;
       }
 
-      /* Penyesuaian agar tetap nyaman dibaca di layar HP (Responsive) */
+      /* Responsive untuk Layar HP */
       @media (max-width: 768px) {
-        .paper-container {
-          padding: 1.5rem; /* Mengabaikan margin 4-3-3-3 khusus untuk HP */
-          margin: 0;
-          width: 100%;
+        .a4-page {
+          padding: 2cm 1.5cm; /* Margin diperkecil di HP agar mudah dibaca */
+          margin: 0 auto 1.5rem auto;
+          width: 95%;
+          min-height: auto;
         }
       }
 
-      /* Memastikan paragraf & list turunannya patuh ke aturan 12pt */
       p,
       li,
       td,
       th {
         font-size: 12pt;
+      }
+
+      /* CSS khusus untuk titik-titik Daftar Isi ala MS Word */
+      .toc-item {
+        display: flex;
+        align-items: baseline;
+        margin-bottom: 0.5rem;
+      }
+      .toc-dots {
+        flex-grow: 1;
+        border-bottom: 2px dotted #000;
+        margin: 0 8px;
+        position: relative;
+        top: -4px;
       }
 
       .gs-reveal {
@@ -71,13 +87,12 @@
     </style>
   </head>
   <body class="antialiased selection:bg-blue-200 selection:text-blue-900">
-    <main class="paper-container overflow-hidden rounded-none sm:rounded-sm">
-      <!-- ================= COVER PAGE ================= -->
+    <!-- ================= HALAMAN 1: COVER ================= -->
+    <article class="a4-page overflow-hidden">
       <section
-        class="gs-reveal flex flex-col items-center justify-center text-center min-h-[85vh] border-b-2 border-gray-300 pb-12 mb-12"
+        class="gs-reveal flex flex-col items-center justify-center text-center h-full min-h-[22cm]"
       >
-        <!-- Judul Makalah -->
-        <div class="mb-10 w-full">
+        <div class="mb-8 w-full mt-8">
           <h1 class="text-[14pt] font-bold uppercase mb-1">MAKALAH PABP</h1>
           <h2 class="text-[14pt] font-bold uppercase mb-1">SYUABUL IMAN</h2>
           <p class="font-bold">
@@ -85,31 +100,27 @@
           </p>
         </div>
 
-        <!-- Tujuan Penyusunan -->
-        <div class="mb-10 w-full">
+        <div class="mb-8 w-full">
           <p>Disusun guna memenuhi tugas mata pelajaran</p>
           <p class="font-bold uppercase mt-1">PABP</p>
         </div>
 
-        <!-- Guru Pengampu -->
-        <div class="mb-10 w-full">
+        <div class="mb-6 w-full">
           <p class="font-bold">Guru Pengampu :</p>
           <p>Miftahudin, S.Pd I</p>
         </div>
 
-        <!-- Logo Cover -->
         <img
           src="LOGO_SMK5y.png"
           alt="Logo SMKN 5"
           class="w-32 sm:w-40 md:w-48 mb-8 object-contain"
         />
 
-        <!-- Kelas (Dikembalikan ke atas daftar penyusun) -->
-        <p class="font-bold mb-10 text-[14pt] uppercase">Kelas X KA 2</p>
+        <!-- Kelas -->
+        <p class="font-bold mb-6 text-[14pt] uppercase">Kelas X KA 2</p>
 
-        <!-- Section Penyusun (Rata Tengah + Teks Kiri bernomor) -->
-        <div class="mb-12 flex flex-col items-center w-full">
-          <!-- Teks diubah sesuai permintaan -->
+        <!-- Penyusun -->
+        <div class="mb-10 flex flex-col items-center w-full">
           <p class="mb-4 italic">Di susun oleh kelompok 3 :</p>
           <div class="inline-block text-left">
             <ol
@@ -126,9 +137,8 @@
           </div>
         </div>
 
-        <!-- Footer Cover -->
         <div
-          class="mt-auto uppercase font-bold text-[12pt] leading-relaxed w-full pt-8"
+          class="mt-auto uppercase font-bold text-[12pt] leading-relaxed w-full"
         >
           <p>PROGRAM STUDI KIMIA ANALISIS</p>
           <p>SEKOLAH MENENGAH KEJURUAN NEGERI 5 KOTA</p>
@@ -136,10 +146,12 @@
           <p>TAHUN AJARAN 2026/2027</p>
         </div>
       </section>
+    </article>
 
-      <!-- ================= KATA PENGANTAR ================= -->
-      <section id="kata-pengantar" class="gs-reveal mb-12">
-        <h2 class="text-[14pt] font-bold text-center mb-6 uppercase">
+    <!-- ================= HALAMAN 2: KATA PENGANTAR ================= -->
+    <article class="a4-page">
+      <section id="kata-pengantar" class="gs-reveal">
+        <h2 class="text-[14pt] font-bold text-center mb-8 uppercase">
           Kata Pengantar
         </h2>
         <div class="space-y-4 text-justify indent-8">
@@ -172,121 +184,101 @@
             Semoga makalah ini dapat memberikan manfaat dan menambah wawasan
             bagi penulis maupun pembaca.
           </p>
-          <div class="text-right mt-8 indent-0">
+          <div class="text-right mt-12 indent-0">
             <p>Bekasi, 31 Agustus 2026</p>
           </div>
         </div>
       </section>
+    </article>
 
-      <hr class="my-12 border-gray-300 gs-reveal" />
-
-      <!-- ================= DAFTAR ISI ================= -->
-      <section id="daftar-isi" class="gs-reveal mb-12">
-        <h2 class="text-[14pt] font-bold text-center mb-6 uppercase">
+    <!-- ================= HALAMAN 3: DAFTAR ISI ================= -->
+    <article class="a4-page">
+      <section id="daftar-isi" class="gs-reveal">
+        <h2 class="text-[14pt] font-bold text-center mb-8 uppercase">
           Daftar Isi
         </h2>
-        <ul class="space-y-2 max-w-2xl mx-auto">
-          <li
-            class="flex justify-between border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>KATA PENGANTAR</span> <span>i</span>
-          </li>
-          <li
-            class="flex justify-between border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>DAFTAR ISI</span> <span>ii</span>
-          </li>
-          <li
-            class="flex justify-between border-b border-gray-200 border-dotted pb-1 mt-4"
-          >
-            <span><strong>BAB I PENDAHULUAN</strong></span>
-            <span><strong>1</strong></span>
-          </li>
-          <li
-            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>Latar Belakang</span> <span>1</span>
-          </li>
-          <li
-            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>Rumusan Masalah</span> <span>1</span>
-          </li>
-          <li
-            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>Tujuan</span> <span>2</span>
-          </li>
-          <li
-            class="flex justify-between border-b border-gray-200 border-dotted pb-1 mt-4"
-          >
-            <span><strong>BAB II PEMBAHASAN</strong></span>
-            <span><strong>2</strong></span>
-          </li>
-          <li
-            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>Pengertian Syu’abul Iman</span> <span>2</span>
-          </li>
-          <li
-            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>Memenuhi Janji</span> <span>3</span>
-          </li>
-          <li
-            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>Mensyukuri Nikmat</span> <span>3</span>
-          </li>
-          <li
-            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>Menjaga Lisan</span> <span>4</span>
-          </li>
-          <li
-            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>Menutup Aib</span> <span>5</span>
-          </li>
-          <li
-            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>Penerapan Syu’abul Iman...</span> <span>6</span>
-          </li>
-          <li
-            class="flex justify-between border-b border-gray-200 border-dotted pb-1 mt-4"
-          >
-            <span><strong>BAB III PENUTUP</strong></span>
-            <span><strong>7</strong></span>
-          </li>
-          <li
-            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>Kesimpulan</span> <span>7</span>
-          </li>
-          <li
-            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>Saran</span> <span>8</span>
-          </li>
-          <li
-            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
-          >
-            <span>Daftar Pustaka</span> <span>8</span>
-          </li>
-        </ul>
+
+        <div class="max-w-3xl mx-auto font-medium">
+          <!-- Item Daftar Isi -->
+          <div class="toc-item">
+            <span>KATA PENGANTAR</span><span class="toc-dots"></span
+            ><span>i</span>
+          </div>
+          <div class="toc-item">
+            <span>DAFTAR ISI</span><span class="toc-dots"></span><span>ii</span>
+          </div>
+
+          <div class="toc-item font-bold mt-4">
+            <span>BAB I PENDAHULUAN</span><span class="toc-dots"></span
+            ><span>1</span>
+          </div>
+          <div class="toc-item pl-6">
+            <span>Latar Belakang</span><span class="toc-dots"></span
+            ><span>1</span>
+          </div>
+          <div class="toc-item pl-6">
+            <span>Rumusan Masalah</span><span class="toc-dots"></span
+            ><span>1</span>
+          </div>
+          <div class="toc-item pl-6">
+            <span>Tujuan</span><span class="toc-dots"></span><span>2</span>
+          </div>
+
+          <div class="toc-item font-bold mt-4">
+            <span>BAB II PEMBAHASAN</span><span class="toc-dots"></span
+            ><span>2</span>
+          </div>
+          <div class="toc-item pl-6">
+            <span>Pengertian Syu’abul Iman</span><span class="toc-dots"></span
+            ><span>2</span>
+          </div>
+          <div class="toc-item pl-6">
+            <span>Memenuhi Janji</span><span class="toc-dots"></span
+            ><span>3</span>
+          </div>
+          <div class="toc-item pl-6">
+            <span>Mensyukuri Nikmat</span><span class="toc-dots"></span
+            ><span>3</span>
+          </div>
+          <div class="toc-item pl-6">
+            <span>Menjaga Lisan</span><span class="toc-dots"></span
+            ><span>4</span>
+          </div>
+          <div class="toc-item pl-6">
+            <span>Menutup Aib</span><span class="toc-dots"></span><span>5</span>
+          </div>
+          <div class="toc-item pl-6">
+            <span>Penerapan Syu’abul Iman dalam Kehidupan Sehari-hari</span
+            ><span class="toc-dots"></span><span>6</span>
+          </div>
+
+          <div class="toc-item font-bold mt-4">
+            <span>BAB III PENUTUP</span><span class="toc-dots"></span
+            ><span>7</span>
+          </div>
+          <div class="toc-item pl-6">
+            <span>Kesimpulan</span><span class="toc-dots"></span><span>7</span>
+          </div>
+          <div class="toc-item pl-6">
+            <span>Saran</span><span class="toc-dots"></span><span>8</span>
+          </div>
+          <div class="toc-item pl-6">
+            <span>Daftar Pustaka</span><span class="toc-dots"></span
+            ><span>8</span>
+          </div>
+        </div>
       </section>
+    </article>
 
-      <hr class="my-12 border-gray-300 gs-reveal" />
-
-      <!-- ================= BAB I ================= -->
-      <section id="bab-1" class="gs-reveal mb-12 text-justify">
-        <div class="text-center mb-6">
+    <!-- ================= HALAMAN 4: BAB I ================= -->
+    <article class="a4-page text-justify">
+      <section id="bab-1" class="gs-reveal">
+        <div class="text-center mb-8">
           <h2 class="text-[14pt] font-bold uppercase">BAB I</h2>
           <h3 class="text-[14pt] font-bold uppercase mt-1">Pendahuluan</h3>
         </div>
 
-        <div class="gs-reveal mb-6">
+        <div class="mb-6">
           <h4 class="font-bold mb-2">1. Latar Belakang</h4>
           <p class="indent-8 mb-2">
             Iman merupakan dasar yang sangat penting dalam kehidupan seorang
@@ -313,7 +305,7 @@
           </p>
         </div>
 
-        <div class="gs-reveal mb-6">
+        <div class="mb-6">
           <h4 class="font-bold mb-2">2. Rumusan Masalah</h4>
           <ol class="list-decimal pl-6 space-y-1">
             <li>Apa yang dimaksud dengan syu’abul iman?</li>
@@ -327,7 +319,7 @@
           </ol>
         </div>
 
-        <div class="gs-reveal mb-6">
+        <div class="mb-6">
           <h4 class="font-bold mb-2">3. Tujuan</h4>
           <ol class="list-decimal pl-6 space-y-1">
             <li>Mengetahui pengertian syu’abul iman.</li>
@@ -343,15 +335,17 @@
           </ol>
         </div>
       </section>
+    </article>
 
-      <!-- ================= BAB II ================= -->
-      <section id="bab-2" class="mb-12 text-justify">
-        <div class="text-center mb-6 gs-reveal mt-12">
+    <!-- ================= HALAMAN 5: BAB II ================= -->
+    <article class="a4-page text-justify">
+      <section id="bab-2" class="gs-reveal">
+        <div class="text-center mb-8">
           <h2 class="text-[14pt] font-bold uppercase">BAB II</h2>
           <h3 class="text-[14pt] font-bold uppercase mt-1">Pembahasan</h3>
         </div>
 
-        <div class="gs-reveal mb-6">
+        <div class="mb-6">
           <h4 class="font-bold mb-2">1. Pengertian Syu’abul Iman</h4>
           <p class="indent-8 mb-2">
             Secara bahasa, syu’abul iman berarti cabang-cabang iman. Syu’abul
@@ -380,9 +374,8 @@
           </p>
         </div>
 
-        <div class="gs-reveal mb-6">
+        <div class="mb-6">
           <h4 class="font-bold mb-2">2. Memenuhi Janji</h4>
-
           <h5 class="font-bold mt-4 mb-2">A. Pengertian Memenuhi Janji</h5>
           <p class="indent-8 mb-2">
             Janji adalah suatu kesanggupan yang diucapkan seseorang untuk
@@ -398,7 +391,7 @@
             Allah Swt. Berfirman dalam QS. Al-Isra’ ayat 34:
           </p>
 
-          <div class="my-6 text-center gs-reveal px-4">
+          <div class="my-6 text-center px-4">
             <p
               dir="rtl"
               lang="ar"
@@ -435,10 +428,14 @@
             baik dengan sesama.
           </p>
         </div>
+      </section>
+    </article>
 
-        <div class="gs-reveal mb-6">
+    <!-- ================= HALAMAN 6: BAB II Lanjutan ================= -->
+    <article class="a4-page text-justify">
+      <section class="gs-reveal">
+        <div class="mb-6">
           <h4 class="font-bold mb-2">3. Mensyukuri Nikmat</h4>
-
           <h5 class="font-bold mt-4 mb-2">A. Pengertian Mensyukuri Nikmat</h5>
           <p class="indent-8 mb-2">
             Nikmat adalah segala sesuatu yang diberikan Allah Swt. Kepada
@@ -453,7 +450,7 @@
             Allah Swt. Berfirman dalam QS. Ibrahim ayat 7:
           </p>
 
-          <div class="my-6 text-center gs-reveal px-4">
+          <div class="my-6 text-center px-4">
             <p
               dir="rtl"
               lang="ar"
@@ -493,9 +490,8 @@
           </p>
         </div>
 
-        <div class="gs-reveal mb-6">
+        <div class="mb-6">
           <h4 class="font-bold mb-2">4. Menjaga Lisan</h4>
-
           <h5 class="font-bold mt-4 mb-2">A. Pengertian Menjaga Lisan</h5>
           <p class="indent-8 mb-2">
             Menjaga lisan berarti berhati-hati dalam berbicara dan menghindari
@@ -508,10 +504,6 @@
               >(HR. Bukhari dan Muslim)</span
             >
           </blockquote>
-          <p class="indent-8 mb-4">
-            Hadis tersebut mengajarkan bahwa seorang muslim harus memperhatikan
-            perkataannya.
-          </p>
 
           <h5 class="font-bold mt-4 mb-2">B. Contoh Menjaga Lisan</h5>
           <ul class="list-disc pl-8 mb-4 space-y-1">
@@ -533,14 +525,16 @@
           <p class="indent-8">
             Menjaga lisan dapat menghindarkan seseorang dari konflik, menjaga
             perasaan orang lain, dan menciptakan hubungan yang lebih baik.
-            Selain itu, seseorang akan lebih dipercaya karena perkataannya dapat
-            dipertanggungjawabkan.
           </p>
         </div>
+      </section>
+    </article>
 
-        <div class="gs-reveal mb-6">
+    <!-- ================= HALAMAN 7: BAB II Lanjutan & Penerapan ================= -->
+    <article class="a4-page text-justify">
+      <section class="gs-reveal">
+        <div class="mb-6">
           <h4 class="font-bold mb-2">5. Menutup Aib</h4>
-
           <h5 class="font-bold mt-4 mb-2">A. Pengertian Menutup Aib</h5>
           <p class="indent-8 mb-2">
             Aib adalah sesuatu yang buruk atau kekurangan yang terdapat pada
@@ -570,22 +564,15 @@
             <li>Menasihati teman secara pribadi ketika melakukan kesalahan.</li>
             <li>Tidak menjadikan kesalahan orang lain sebagai bahan ejekan.</li>
           </ul>
-          <p class="indent-8 mt-2">
-            Menutup aib bukan berarti membiarkan perbuatan yang membahayakan.
-            Jika seseorang mengalami masalah serius atau berada dalam bahaya,
-            kita sebaiknya mencari bantuan dari orang dewasa yang dapat
-            dipercaya.
-          </p>
 
           <h5 class="font-bold mt-4 mb-2">C. Hikmah Menutup Aib</h5>
           <p class="indent-8">
             Menutup aib dapat menjaga kehormatan seseorang, mempererat
-            persaudaraan, dan menghindarkan terjadinya permusuhan. Sikap ini
-            juga mengajarkan kita untuk tidak mudah menghakimi orang lain.
+            persaudaraan, dan menghindarkan terjadinya permusuhan.
           </p>
         </div>
 
-        <div class="gs-reveal mt-12">
+        <div class="mt-8">
           <h4 class="font-bold mb-4 text-center">
             Penerapan Syu'abul Iman dalam Kehidupan Sehari-hari
           </h4>
@@ -598,13 +585,10 @@
             tidak menyebarkan aib atau kekurangan orang lain. Dengan membiasakan
             perilaku tersebut, kita dapat menunjukkan bahwa keimanan tidak hanya
             terdapat dalam hati, tetapi juga tercermin melalui sikap dan
-            perbuatan. Penerapan syu’abul iman juga dapat membantu menciptakan
-            hubungan yang harmonis, menumbuhkan rasa saling menghargai, serta
-            membentuk pribadi yang memiliki akhlak terpuji.
+            perbuatan.
           </p>
 
-          <!-- Responsif Tabel -->
-          <div class="overflow-x-auto my-8">
+          <div class="overflow-x-auto my-6">
             <table
               class="w-full text-left border-collapse border border-black min-w-full"
             >
@@ -662,21 +646,20 @@
             bertanggung jawab, bersyukur, santun, dan menghargai orang lain.
             Selain itu, penerapan syu’abul iman juga dapat membantu menciptakan
             hubungan yang baik dengan keluarga, teman, guru, dan masyarakat.
-            Dengan membiasakan diri memenuhi janji, mensyukuri nikmat, menjaga
-            lisan, serta menutup aib, kita dapat meningkatkan kualitas keimanan
-            sekaligus membentuk akhlak yang baik sesuai dengan ajaran.
           </p>
         </div>
       </section>
+    </article>
 
-      <!-- ================= BAB III ================= -->
-      <section id="bab-3" class="mb-12 text-justify">
-        <div class="text-center mb-6 gs-reveal mt-12">
+    <!-- ================= HALAMAN 8: BAB III & DAFTAR PUSTAKA ================= -->
+    <article class="a4-page text-justify">
+      <section id="bab-3" class="gs-reveal mb-12">
+        <div class="text-center mb-8">
           <h2 class="text-[14pt] font-bold uppercase">BAB III</h2>
           <h3 class="text-[14pt] font-bold uppercase mt-1">Penutup</h3>
         </div>
 
-        <div class="gs-reveal mb-6">
+        <div class="mb-6">
           <h4 class="font-bold mb-2">1. Kesimpulan</h4>
           <p class="indent-8 mb-2">
             Syu’abul iman merupakan cabang-cabang iman yang diwujudkan melalui
@@ -692,14 +675,9 @@
             menyakiti orang lain. Sementara itu, menutup aib mengajarkan kita
             untuk menjaga kehormatan dan privasi orang lain.
           </p>
-          <p class="indent-8">
-            Dengan menerapkan keempat sikap tersebut dalam kehidupan
-            sehari-hari, kita dapat menjadi pribadi yang lebih baik serta
-            menjalankan ajaran Islam dengan lebih baik.
-          </p>
         </div>
 
-        <div class="gs-reveal mb-6">
+        <div class="mb-6">
           <h4 class="font-bold mb-2">2. Saran</h4>
           <p class="indent-8 mb-2">
             Sebagai seorang muslim, kita sebaiknya terus berusaha menerapkan
@@ -719,10 +697,10 @@
         </div>
       </section>
 
-      <hr class="my-12 border-gray-300 gs-reveal" />
-
-      <!-- ================= DAFTAR PUSTAKA ================= -->
-      <section id="daftar-pustaka" class="gs-reveal pb-12">
+      <section
+        id="daftar-pustaka"
+        class="gs-reveal pt-10 border-t border-gray-300"
+      >
         <h2 class="text-[14pt] font-bold mb-6 uppercase text-center">
           Daftar Pustaka
         </h2>
@@ -739,7 +717,7 @@
           <li>Muslim, Imam. Shahih Muslim.</li>
         </ul>
       </section>
-    </main>
+    </article>
 
     <!-- GSAP & ScrollTrigger Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
