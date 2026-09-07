@@ -19,24 +19,24 @@
     <!-- Custom CSS untuk Format Makalah Resmi (A4) -->
     <style>
       body {
-        background-color: #e5e7eb; /* Warna background luar kertas agak gelap agar kertas menonjol */
+        background-color: #e5e7eb;
         font-family: "Times New Roman", Times, serif;
         scroll-behavior: smooth;
         color: #000000;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
       }
 
       .arabic-text {
         font-family: "Amiri", serif;
       }
 
-      /* Class baru untuk Lembaran Kertas A4 Terpisah */
+      /* Class untuk Lembaran Kertas A4 Terpisah */
       .a4-page {
         background-color: white;
         max-width: 21cm;
-        min-height: 29.7cm; /* Tinggi minimal A4 */
-        margin: 0 auto 3rem auto; /* Jarak 3rem antar lembaran kertas */
+        min-height: 29.7cm;
+        margin: 0 auto 1.5rem auto;
 
         /* Margin Kertas: Atas 3cm, Kanan 3cm, Bawah 3cm, Kiri 4cm */
         padding: 3cm 3cm 3cm 4cm;
@@ -45,16 +45,27 @@
         font-size: 12pt;
         line-height: 1.5;
 
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Efek bayangan kertas */
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         box-sizing: border-box;
         position: relative;
+      }
+
+      /* Penomoran Halaman di bawah tengah */
+      .page-number {
+        position: absolute;
+        bottom: 1.5cm;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 12pt;
+        font-family: "Times New Roman", Times, serif;
       }
 
       /* Responsive untuk Layar HP */
       @media (max-width: 768px) {
         .a4-page {
-          padding: 2cm 1.5cm; /* Margin diperkecil di HP agar mudah dibaca */
-          margin: 0 auto 1.5rem auto;
+          padding: 2cm 1.5cm 2.5cm 1.5cm;
+          margin: 0 auto 1rem auto;
           width: 95%;
           min-height: auto;
         }
@@ -87,7 +98,7 @@
     </style>
   </head>
   <body class="antialiased selection:bg-blue-200 selection:text-blue-900">
-    <!-- ================= HALAMAN 1: COVER ================= -->
+    <!-- ================= HALAMAN COVER (Tanpa Nomor Halaman) ================= -->
     <article class="a4-page overflow-hidden">
       <section
         class="gs-reveal flex flex-col items-center justify-center text-center h-full min-h-[22cm]"
@@ -116,10 +127,8 @@
           class="w-32 sm:w-40 md:w-48 mb-8 object-contain"
         />
 
-        <!-- Kelas -->
         <p class="font-bold mb-6 text-[14pt] uppercase">Kelas X KA 2</p>
 
-        <!-- Penyusun -->
         <div class="mb-10 flex flex-col items-center w-full">
           <p class="mb-4 italic">Di susun oleh kelompok 3 :</p>
           <div class="inline-block text-left">
@@ -148,7 +157,7 @@
       </section>
     </article>
 
-    <!-- ================= HALAMAN 2: KATA PENGANTAR ================= -->
+    <!-- ================= HALAMAN i: KATA PENGANTAR ================= -->
     <article class="a4-page">
       <section id="kata-pengantar" class="gs-reveal">
         <h2 class="text-[14pt] font-bold text-center mb-8 uppercase">
@@ -189,9 +198,11 @@
           </div>
         </div>
       </section>
+      <!-- Nomor Halaman -->
+      <div class="page-number">i</div>
     </article>
 
-    <!-- ================= HALAMAN 3: DAFTAR ISI ================= -->
+    <!-- ================= HALAMAN ii: DAFTAR ISI ================= -->
     <article class="a4-page">
       <section id="daftar-isi" class="gs-reveal">
         <h2 class="text-[14pt] font-bold text-center mb-8 uppercase">
@@ -199,7 +210,6 @@
         </h2>
 
         <div class="max-w-3xl mx-auto font-medium">
-          <!-- Item Daftar Isi -->
           <div class="toc-item">
             <span>KATA PENGANTAR</span><span class="toc-dots"></span
             ><span>i</span>
@@ -260,7 +270,7 @@
             <span>Kesimpulan</span><span class="toc-dots"></span><span>7</span>
           </div>
           <div class="toc-item pl-6">
-            <span>Saran</span><span class="toc-dots"></span><span>8</span>
+            <span>Saran</span><span class="toc-dots"></span><span>7</span>
           </div>
           <div class="toc-item pl-6">
             <span>Daftar Pustaka</span><span class="toc-dots"></span
@@ -268,9 +278,11 @@
           </div>
         </div>
       </section>
+      <!-- Nomor Halaman -->
+      <div class="page-number">ii</div>
     </article>
 
-    <!-- ================= HALAMAN 4: BAB I ================= -->
+    <!-- ================= HALAMAN 1: BAB I ================= -->
     <article class="a4-page text-justify">
       <section id="bab-1" class="gs-reveal">
         <div class="text-center mb-8">
@@ -318,8 +330,15 @@
             </li>
           </ol>
         </div>
+      </section>
+      <!-- Nomor Halaman -->
+      <div class="page-number">1</div>
+    </article>
 
-        <div class="mb-6">
+    <!-- ================= HALAMAN 2: BAB I & BAB II ================= -->
+    <article class="a4-page text-justify">
+      <section class="gs-reveal">
+        <div class="mb-10">
           <h4 class="font-bold mb-2">3. Tujuan</h4>
           <ol class="list-decimal pl-6 space-y-1">
             <li>Mengetahui pengertian syu’abul iman.</li>
@@ -334,13 +353,8 @@
             </li>
           </ol>
         </div>
-      </section>
-    </article>
 
-    <!-- ================= HALAMAN 5: BAB II ================= -->
-    <article class="a4-page text-justify">
-      <section id="bab-2" class="gs-reveal">
-        <div class="text-center mb-8">
+        <div class="text-center mb-8 mt-12">
           <h2 class="text-[14pt] font-bold uppercase">BAB II</h2>
           <h3 class="text-[14pt] font-bold uppercase mt-1">Pembahasan</h3>
         </div>
@@ -373,8 +387,15 @@
             keimanan.
           </p>
         </div>
+      </section>
+      <!-- Nomor Halaman -->
+      <div class="page-number">2</div>
+    </article>
 
-        <div class="mb-6">
+    <!-- ================= HALAMAN 3: BAB II Lanjutan ================= -->
+    <article class="a4-page text-justify">
+      <section class="gs-reveal">
+        <div class="mb-8">
           <h4 class="font-bold mb-2">2. Memenuhi Janji</h4>
           <h5 class="font-bold mt-4 mb-2">A. Pengertian Memenuhi Janji</h5>
           <p class="indent-8 mb-2">
@@ -428,12 +449,7 @@
             baik dengan sesama.
           </p>
         </div>
-      </section>
-    </article>
 
-    <!-- ================= HALAMAN 6: BAB II Lanjutan ================= -->
-    <article class="a4-page text-justify">
-      <section class="gs-reveal">
         <div class="mb-6">
           <h4 class="font-bold mb-2">3. Mensyukuri Nikmat</h4>
           <h5 class="font-bold mt-4 mb-2">A. Pengertian Mensyukuri Nikmat</h5>
@@ -442,6 +458,16 @@
             manusia, baik berupa kesehatan, keluarga, ilmu, rezeki, waktu,
             maupun kesempatan.
           </p>
+        </div>
+      </section>
+      <!-- Nomor Halaman -->
+      <div class="page-number">3</div>
+    </article>
+
+    <!-- ================= HALAMAN 4: BAB II Lanjutan ================= -->
+    <article class="a4-page text-justify">
+      <section class="gs-reveal">
+        <div class="mb-8">
           <p class="indent-8 mb-2">
             Mensyukuri nikmat berarti menyadari bahwa segala nikmat berasal dari
             Allah Swt. Dan menggunakannya untuk melakukan hal-hal yang baik.
@@ -508,6 +534,18 @@
           <h5 class="font-bold mt-4 mb-2">B. Contoh Menjaga Lisan</h5>
           <ul class="list-disc pl-8 mb-4 space-y-1">
             <li>Tidak menghina atau mengejek orang lain.</li>
+          </ul>
+        </div>
+      </section>
+      <!-- Nomor Halaman -->
+      <div class="page-number">4</div>
+    </article>
+
+    <!-- ================= HALAMAN 5: BAB II Lanjutan ================= -->
+    <article class="a4-page text-justify">
+      <section class="gs-reveal">
+        <div class="mb-8">
+          <ul class="list-disc pl-8 mb-4 space-y-1">
             <li>
               Tidak menyebarkan fitnah dan berita yang belum diketahui
               kebenarannya.
@@ -527,12 +565,7 @@
             perasaan orang lain, dan menciptakan hubungan yang lebih baik.
           </p>
         </div>
-      </section>
-    </article>
 
-    <!-- ================= HALAMAN 7: BAB II Lanjutan & Penerapan ================= -->
-    <article class="a4-page text-justify">
-      <section class="gs-reveal">
         <div class="mb-6">
           <h4 class="font-bold mb-2">5. Menutup Aib</h4>
           <h5 class="font-bold mt-4 mb-2">A. Pengertian Menutup Aib</h5>
@@ -571,8 +604,15 @@
             persaudaraan, dan menghindarkan terjadinya permusuhan.
           </p>
         </div>
+      </section>
+      <!-- Nomor Halaman -->
+      <div class="page-number">5</div>
+    </article>
 
-        <div class="mt-8">
+    <!-- ================= HALAMAN 6: BAB II Lanjutan ================= -->
+    <article class="a4-page text-justify">
+      <section class="gs-reveal">
+        <div class="mt-4">
           <h4 class="font-bold mb-4 text-center">
             Penerapan Syu'abul Iman dalam Kehidupan Sehari-hari
           </h4>
@@ -649,9 +689,11 @@
           </p>
         </div>
       </section>
+      <!-- Nomor Halaman -->
+      <div class="page-number">6</div>
     </article>
 
-    <!-- ================= HALAMAN 8: BAB III & DAFTAR PUSTAKA ================= -->
+    <!-- ================= HALAMAN 7: BAB III ================= -->
     <article class="a4-page text-justify">
       <section id="bab-3" class="gs-reveal mb-12">
         <div class="text-center mb-8">
@@ -696,11 +738,13 @@
           </p>
         </div>
       </section>
+      <!-- Nomor Halaman -->
+      <div class="page-number">7</div>
+    </article>
 
-      <section
-        id="daftar-pustaka"
-        class="gs-reveal pt-10 border-t border-gray-300"
-      >
+    <!-- ================= HALAMAN 8: DAFTAR PUSTAKA ================= -->
+    <article class="a4-page text-justify">
+      <section id="daftar-pustaka" class="gs-reveal pt-10">
         <h2 class="text-[14pt] font-bold mb-6 uppercase text-center">
           Daftar Pustaka
         </h2>
@@ -717,6 +761,8 @@
           <li>Muslim, Imam. Shahih Muslim.</li>
         </ul>
       </section>
+      <!-- Nomor Halaman -->
+      <div class="page-number">8</div>
     </article>
 
     <!-- GSAP & ScrollTrigger Scripts -->
