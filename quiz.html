@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Syu'abul Iman</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f0f4f8;
+      }
+
+      .option-btn {
+        transition: all 0.2s ease-in-out;
+      }
+      .option-btn:active {
+        transform: scale(0.98);
+      }
+      .selected {
+        background-color: #e0f2fe !important;
+        border-color: #3b82f6 !important;
+      }
+
+      /* Tema List Review Sederhana */
+      .review-list-card {
+        background-color: white;
+        border-radius: 0.75rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1rem;
+        padding: 1.25rem;
+        cursor: pointer;
+        border: 1px solid #e5e7eb;
+        transition: all 0.2s;
+        overflow: hidden;
+        position: relative;
+      }
+      .review-list-card:hover {
+        border-color: #cbd5e1;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+      }
+
+      .review-list-card.correct-card {
+        border-left: 6px solid #10b981;
+      }
+      .review-list-card.wrong-card {
+        border-left: 6px solid #ef4444;
+      }
+
+      .review-list-opt {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-top: 0.75rem;
+      }
+
+      /* Tema Detail Review */
+      .detail-header-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem 0;
+        border-bottom: 2px solid #f3f4f6;
+        margin-bottom: 1rem;
+        color: #6b7280;
+        font-size: 0.875rem;
+      }
+      .detail-opt-box {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background-color: #f9fafb;
+        margin-bottom: 0.75rem;
+        border: 1px solid #f3f4f6;
+      }
+
+      .detail-opt-box.correct-bg {
+        background-color: #f0fdf4;
+        border-color: #bbf7d0;
+      }
+
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #e5e7eb;
+        padding: 0.75rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 40;
+        border-top: 1px solid #d1d5db;
+      }
+    </style>
+  </head>
+  <body class="text-gray-800 pb-20 pt-20">
+    <nav
+      id="main-navbar"
+      class="fixed top-0 left-0 w-full bg-white shadow-sm z-50"
+    >
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <span class="font-bold text-lg text-gray-800 tracking-wide uppercase"
+            >PABP <span class="text-blue-600">SMKN 5</span></span
+          >
+          <div class="flex space-x-2">
+            <a
+              href="quiz.html"
+              class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-semibold shadow-sm"
+              >Quiz</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <nav
+      id="detail-navbar"
+      class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 hidden"
+    >
+      <div
+        class="max-w-3xl mx-auto px-4 flex justify-between items-center h-14"
+      >
+        <div class="flex items-center gap-2">
+          <span id="detail-nav-title" class="text-lg font-medium text-gray-700"
+            >Question 1</span
+          >
+          <div
+            id="detail-nav-icon"
+            class="w-6 h-6 rounded flex items-center justify-center"
+          ></div>
+        </div>
+        <button
+          onclick="closeDetailReview()"
+          class="text-gray-500 hover:text-gray-800 p-2"
+        >
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+    </nav>
+
+    <div class="max-w-3xl mx-auto px-4">
+      <!-- Screen 1: Form Identitas -->
+      <div
+        id="start-screen"
+        class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 mt-6"
+      >
+        <h2 class="text-2xl font-bold text-center mb-6 text-blue-600">
+          Quiz: Syu'abul Iman
+        </h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1"
+              >Nama Lengkap</label
+            >
+            <input
+              type="text"
+              id="studentName"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Masukkan nama..."
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1"
+              >No. Absen</label
+            >
+            <input
+              type="number"
+              id="studentAbsen"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Masukkan no absen..."
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1"
+              >Kelas</label
+            >
+            <select
+              id="studentClass"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            >
+              <option value="XI KA 2">XI KA 2</option>
+            </select>
+          </div>
+          <button
+            onclick="startQuiz()"
+            class="w-full mt-6 bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition"
+          >
+            Mulai Quiz
+          </button>
+        </div>
+      </div>
+
+      <!-- Screen 2: Area Quiz -->
+      <div id="quiz-screen" class="hidden mt-6">
+        <div class="flex justify-between items-center mb-4 px-2">
+          <span id="question-counter" class="font-bold text-gray-500"
+            >Soal 1 dari 10</span
+          >
+          <span
+            class="bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1 rounded-full border border-blue-100"
+            >10 Poin/Soal</span
+          >
+        </div>
+
+        <div
+          class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100"
+        >
+          <h3
+            id="question-text"
+            class="text-lg sm:text-xl font-semibold mb-6 text-gray-800"
+          >
+            1. Pertanyaan muncul di sini?
+          </h3>
+          <div id="options-container" class="space-y-3"></div>
+        </div>
+      </div>
+
+      <!-- Screen 3: Hasil & Daftar Review (Mode Terang) -->
+      <div id="result-screen" class="hidden mt-4">
+        <div
+          class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 mb-6"
+        >
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-gray-800 font-bold flex items-center gap-1"
+              >Nilai
+              <i class="fa-solid fa-circle-info text-gray-400 text-xs"></i
+            ></span>
+            <span
+              class="bg-gray-100 border border-gray-300 text-gray-800 rounded-full px-3 py-1 text-sm font-bold"
+              ><span id="final-percentage">0</span>%</span
+            >
+          </div>
+          <div
+            class="w-full bg-gray-200 rounded-full h-4 mb-4 overflow-hidden shadow-inner"
+          >
+            <div
+              id="score-bar"
+              class="bg-emerald-400 h-4 rounded-full transition-all duration-1000"
+              style="width: 0%"
+            ></div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 mt-6">
+            <div class="bg-blue-50/50 border border-blue-100 p-4 rounded-xl">
+              <p class="text-xs text-blue-600 font-semibold uppercase mb-1">
+                Identitas Siswa
+              </p>
+              <p id="result-name" class="font-medium text-gray-800 text-sm">
+                Nama | Absen
+              </p>
+            </div>
+            <div
+              class="bg-emerald-50/50 border border-emerald-100 p-4 rounded-xl"
+            >
+              <p class="text-xs text-emerald-600 font-semibold uppercase mb-1">
+                Total Poin
+              </p>
+              <p class="font-bold text-gray-800 text-lg">
+                <span id="final-score">0</span>
+                <span class="text-sm font-medium text-gray-500">/ 100</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center mb-4 px-1">
+          <h3 class="text-lg font-bold text-gray-800">Review Soal</h3>
+          <span class="text-sm font-medium text-gray-500"
+            >Klik pertanyaan untuk melihat detail</span
+          >
+        </div>
+
+        <div id="review-list-container"></div>
+
+        <div class="mt-8 mb-10 pb-8 flex justify-center">
+          <button
+            onclick="location.reload()"
+            class="bg-white border border-gray-300 text-gray-700 font-bold py-3 px-8 rounded-full hover:bg-gray-50 transition shadow-sm"
+          >
+            Kembali ke Beranda
+          </button>
+        </div>
+      </div>
+
+      <!-- Screen 4: Detail Review -->
+      <div id="detail-review-screen" class="hidden mt-6 pb-24">
+        <div
+          class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden"
+        >
+          <div class="p-4 sm:p-6">
+            <div class="detail-header-info">
+              <span id="detail-time"
+                ><i class="fa-regular fa-clock"></i> 14.5s</span
+              >
+              <span id="detail-pts" class="font-medium text-gray-800"
+                ><i class="fa-regular fa-circle-check"></i> 1/1 pts</span
+              >
+              <span
+                ><i class="fa-solid fa-coins"></i> Skor:<span
+                  id="detail-score-txt"
+                  >10</span
+                ></span
+              >
+              <span
+                class="text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200"
+                ><i class="fa-regular fa-circle-check"></i> 1 percobaan</span
+              >
+            </div>
+
+            <h3
+              id="detail-question"
+              class="text-[15px] text-gray-800 mb-6 leading-relaxed border-b border-gray-100 pb-4"
+            >
+              Teks soal muncul disini...
+            </h3>
+
+            <div id="detail-options-container"></div>
+          </div>
+        </div>
+
+        <!-- Bottom Navigation dengan fitur Toggle Interaktif -->
+        <div class="bottom-nav">
+          <div class="flex gap-4 text-xs text-gray-600 font-medium">
+            <div
+              class="flex items-center gap-2 cursor-pointer select-none"
+              onclick="toggleCorrectAnswer()"
+            >
+              <div
+                id="check-correct"
+                class="w-4 h-4 bg-purple-600 rounded flex items-center justify-center border border-purple-600 transition-colors"
+              >
+                <i class="fa-solid fa-check text-white text-[10px]"></i>
+              </div>
+              Jawaban yang Benar
+            </div>
+            <div
+              class="flex items-center gap-2 cursor-pointer select-none"
+              onclick="toggleUserAnswer()"
+            >
+              <div
+                id="check-user"
+                class="w-4 h-4 bg-purple-600 rounded flex items-center justify-center border border-purple-600 transition-colors"
+              >
+                <i class="fa-solid fa-check text-white text-[10px]"></i>
+              </div>
+              Jawaban kamu
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button
+              onclick="navigateDetail(-1)"
+              id="btn-prev"
+              class="bg-gray-400 text-white px-4 py-2 rounded flex flex-col items-center justify-center leading-none disabled:opacity-50"
+            >
+              <i class="fa-solid fa-arrow-left text-sm mb-1"></i>
+              <span class="text-[10px] font-bold uppercase">PREV</span>
+            </button>
+            <button
+              onclick="navigateDetail(1)"
+              id="btn-next"
+              class="bg-purple-600 text-white px-4 py-2 rounded flex flex-col items-center justify-center leading-none disabled:opacity-50"
+            >
+              <i class="fa-solid fa-arrow-right text-sm mb-1"></i>
+              <span class="text-[10px] font-bold uppercase">NEXT</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "Secara bahasa, apa yang dimaksud dengan syu'abul iman?",
+          options: [
+            "A. Pokok-pokok agama",
+            "B. Rukun iman",
+            "C. Cabang-cabang iman",
+            "D. Tingkatan keimanan",
+            "E. Kesempurnaan iman",
+          ],
+          correct: 2,
+        },
+        {
+          q: "Berdasarkan hadis riwayat Bukhari dan Muslim yang disebutkan dalam makalah, iman memiliki lebih dari berapa cabang?",
+          options: [
+            "A. Lima puluh cabang",
+            "B. Enam puluh cabang",
+            "C. Tujuh puluh cabang",
+            "D. Delapan puluh cabang",
+            "E. Sembilan puluh cabang",
+          ],
+          correct: 1,
+        },
+        {
+          q: "Memenuhi janji merupakan salah satu cabang iman. Ayat Al-Qur'an yang menjelaskan bahwa janji pasti akan diminta pertanggungjawabannya adalah...",
+          options: [
+            "A. QS. Ibrahim ayat 7",
+            "B. QS. Al-Baqarah ayat 153",
+            "C. QS. Al-Isra' ayat 34",
+            "D. QS. Al-Ma'idah ayat 1",
+            "E. QS. Al-Hujurat ayat 10",
+          ],
+          correct: 2,
+        },
+        {
+          q: '"Sesungguhnya jika kamu bersyukur, niscaya Aku akan menambah (nikmat) kepadamu..." Kutipan terjemahan tersebut merupakan firman Allah Swt. tentang mensyukuri nikmat yang terdapat dalam surah...',
+          options: [
+            "A. QS. Ibrahim ayat 7",
+            "B. QS. Al-Isra' ayat 34",
+            "C. QS. Ar-Rahman ayat 13",
+            "D. QS. Al-Baqarah ayat 152",
+            "E. QS. Luqman ayat 12",
+          ],
+          correct: 0,
+        },
+        {
+          q: "Menggunakan kesehatan untuk belajar dan beribadah, serta menggunakan ilmu untuk membantu orang lain merupakan bentuk mensyukuri nikmat melalui...",
+          options: [
+            "A. Hati",
+            "B. Lisan",
+            "C. Perbuatan",
+            "D. Pikiran",
+            "E. Niat",
+          ],
+          correct: 2,
+        },
+        {
+          q: 'Terkait perilaku menjaga lisan, Rasulullah saw. bersabda: "Barang siapa beriman kepada Allah dan hari akhir, hendaklah ia..."',
+          options: [
+            "A. Menghormati tamunya",
+            "B. Berkata baik atau diam",
+            "C. Menyayangi yang lebih muda",
+            "D. Menutup aib saudaranya",
+            "E. Memenuhi janjinya",
+          ],
+          correct: 1,
+        },
+        {
+          q: "Berdasarkan makalah tersebut, berikut ini yang bukan merupakan hikmah dari menjaga lisan adalah...",
+          options: [
+            "A. Menghindarkan seseorang dari konflik",
+            "B. Menjaga perasaan orang lain",
+            "C. Mendatangkan kekayaan harta benda",
+            "D. Menciptakan hubungan yang lebih baik",
+            "E. Lebih dipercaya karena perkataannya dapat dipertanggungjawabkan",
+          ],
+          correct: 2,
+        },
+        {
+          q: "Apa pengertian dari menutup aib yang benar berdasarkan makalah di atas?",
+          options: [
+            "A. Menyembunyikan barang milik orang lain",
+            "B. Membiarkan teman melakukan kesalahan yang membahayakan",
+            "C. Menjauhi teman yang memiliki banyak kekurangan",
+            "D. Tidak membuka atau menyebarkan kekurangan dan kesalahan seseorang",
+            "E. Membicarakan keburukan orang lain di media sosial",
+          ],
+          correct: 3,
+        },
+        {
+          q: "Menutup aib bukan berarti membiarkan perbuatan yang membahayakan. Kapan kita sebaiknya mencari bantuan dari orang dewasa terkait masalah orang lain?",
+          options: [
+            "A. Ketika orang tersebut memiliki kekurangan fisik",
+            "B. Ketika hal tersebut berkaitan dengan tindakan yang membahayakan atau membutuhkan pertolongan serius",
+            "C. Ketika kita merasa iri dengan pencapaian orang tersebut",
+            "D. Ketika teman tersebut pernah membicarakan keburukan kita",
+            "E. Ketika kita ingin terlihat peduli di depan teman-teman",
+          ],
+          correct: 1,
+        },
+        {
+          q: 'Berdasarkan tabel penerapan dalam makalah, contoh penerapan nyata dari sikap "Memenuhi Janji" dalam kehidupan sehari-hari adalah...',
+          options: [
+            "A. Berbicara sopan dan tidak menyebarkan fitnah",
+            "B. Mengucapkan Alhamdulillah",
+            "C. Tidak menyebarkan kekurangan atau kesalahan teman",
+            "D. Menyelesaikan tugas sesuai kesepakatan",
+            "E. Menggunakan nikmat untuk kebaikan",
+          ],
+          correct: 3,
+        },
+      ];
+
+      let currentQuestion = 0;
+      let score = 0;
+      let userAnswers = [];
+      let sortedAnswers = [];
+      let studentData = {};
+      let questionStartTime;
+
+      // State Toggle Filter
+      let showCorrectAnswer = true;
+      let showUserAnswer = true;
+
+      function startQuiz() {
+        const name = document.getElementById("studentName").value;
+        const absen = document.getElementById("studentAbsen").value;
+        const kelas = document.getElementById("studentClass").value;
+
+        if (!name || !absen) {
+          alert("Harap isi Nama dan No Absen!");
+          return;
+        }
+
+        studentData = { name, absen, kelas };
+        document.getElementById("start-screen").classList.add("hidden");
+        document.getElementById("quiz-screen").classList.remove("hidden");
+        loadQuestion();
+      }
+
+      function loadQuestion() {
+        questionStartTime = Date.now();
+        const q = questions[currentQuestion];
+        document.getElementById("question-counter").innerText =
+          `Soal ${currentQuestion + 1} dari ${questions.length}`;
+        document.getElementById("question-text").innerText =
+          `${currentQuestion + 1}. ${q.q}`;
+
+        const optionsContainer = document.getElementById("options-container");
+        optionsContainer.innerHTML = "";
+
+        q.options.forEach((opt, index) => {
+          const btn = document.createElement("button");
+          btn.className =
+            "option-btn w-full text-left px-5 py-4 border border-gray-300 rounded-xl text-[15px] text-gray-700 hover:bg-gray-50 focus:outline-none";
+          btn.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <div class="mt-0.5 w-4 h-4 rounded-full border border-gray-400 flex-shrink-0"></div>
+                        <span>${opt}</span>
+                    </div>
+                `;
+          btn.onclick = () => selectAnswer(index, btn);
+          optionsContainer.appendChild(btn);
+        });
+      }
+
+      function selectAnswer(selectedIndex, btnElement) {
+        const timeTaken = ((Date.now() - questionStartTime) / 1000).toFixed(1);
+        const buttons = document.querySelectorAll(".option-btn");
+        buttons.forEach((b) => (b.disabled = true));
+
+        btnElement.classList.add("selected");
+        const circle = btnElement.querySelector(".rounded-full");
+        circle.classList.remove("border-gray-400");
+        circle.classList.add("bg-blue-500", "border-blue-500");
+
+        const isCorrect = selectedIndex === questions[currentQuestion].correct;
+        if (isCorrect) score += 10;
+
+        userAnswers.push({
+          originalIndex: currentQuestion,
+          questionNum: currentQuestion + 1,
+          questionText: questions[currentQuestion].q,
+          options: questions[currentQuestion].options,
+          selectedIndex: selectedIndex,
+          correctIndex: questions[currentQuestion].correct,
+          isCorrect: isCorrect,
+          time: timeTaken,
+        });
+
+        setTimeout(() => {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            loadQuestion();
+          } else {
+            finishQuiz();
+          }
+        }, 600);
+      }
+
+      function finishQuiz() {
+        document.getElementById("quiz-screen").classList.add("hidden");
+        document.getElementById("result-screen").classList.remove("hidden");
+
+        document.getElementById("result-name").innerText =
+          `${studentData.name} | Absen: ${studentData.absen}`;
+        document.getElementById("final-score").innerText = score;
+        document.getElementById("final-percentage").innerText = score;
+
+        setTimeout(() => {
+          const bar = document.getElementById("score-bar");
+          bar.style.width = score + "%";
+        }, 300);
+
+        sortedAnswers = [...userAnswers].sort((a, b) => {
+          if (a.isCorrect === b.isCorrect) return a.questionNum - b.questionNum;
+          return a.isCorrect ? 1 : -1;
+        });
+
+        renderReviewList();
+        saveToDatabase();
+      }
+
+      function renderReviewList() {
+        const listContainer = document.getElementById("review-list-container");
+        listContainer.innerHTML = "";
+
+        sortedAnswers.forEach((ans, index) => {
+          const card = document.createElement("div");
+          card.className = `review-list-card ${ans.isCorrect ? "correct-card" : "wrong-card"}`;
+          card.onclick = () => openDetailReview(index);
+
+          const titleHtml = `<div class="font-medium text-gray-800 text-[15px] leading-snug">${ans.questionNum}. ${ans.questionText}</div>`;
+
+          let optionsHtml = "";
+          ans.options.forEach((opt, oIdx) => {
+            const isUserPick = oIdx === ans.selectedIndex;
+            const isCorrectAnswer = oIdx === ans.correctIndex;
+
+            if (isCorrectAnswer) {
+              optionsHtml += `
+                        <div class="review-list-opt w-full">
+                            <div class="w-5 h-5 rounded-full bg-emerald-100 flex-shrink-0 mt-0.5 flex items-center justify-center">
+                                <i class="fa-solid fa-check text-[10px] text-emerald-600"></i>
+                            </div>
+                            <span class="text-sm text-gray-700">${opt}</span>
+                        </div>`;
+            } else if (isUserPick && !isCorrectAnswer) {
+              optionsHtml += `
+                        <div class="review-list-opt w-full">
+                            <div class="w-5 h-5 rounded-full bg-red-100 flex-shrink-0 mt-0.5 flex items-center justify-center">
+                                <i class="fa-solid fa-xmark text-[10px] text-red-600"></i>
+                            </div>
+                            <span class="text-sm text-gray-700">${opt}</span>
+                        </div>`;
+            } else {
+              optionsHtml += `
+                        <div class="review-list-opt w-full opacity-60">
+                            <div class="w-5 h-5 rounded-full bg-gray-200 flex-shrink-0 mt-0.5"></div>
+                            <span class="text-sm text-gray-500">${opt}</span>
+                        </div>`;
+            }
+          });
+
+          card.innerHTML = titleHtml + optionsHtml;
+          listContainer.appendChild(card);
+        });
+      }
+
+      let currentDetailIndex = 0;
+
+      function openDetailReview(index) {
+        currentDetailIndex = index;
+        document.getElementById("main-navbar").classList.add("hidden");
+        document.getElementById("result-screen").classList.add("hidden");
+
+        document.getElementById("detail-navbar").classList.remove("hidden");
+        document
+          .getElementById("detail-review-screen")
+          .classList.remove("hidden");
+
+        window.scrollTo(0, 0);
+        renderDetailCard();
+      }
+
+      function closeDetailReview() {
+        document.getElementById("detail-navbar").classList.add("hidden");
+        document.getElementById("detail-review-screen").classList.add("hidden");
+
+        document.getElementById("main-navbar").classList.remove("hidden");
+        document.getElementById("result-screen").classList.remove("hidden");
+      }
+
+      function navigateDetail(direction) {
+        currentDetailIndex += direction;
+        renderDetailCard();
+      }
+
+      // Toggle Function: Jawaban yang Benar
+      function toggleCorrectAnswer() {
+        showCorrectAnswer = !showCorrectAnswer;
+        const check = document.getElementById("check-correct");
+        if (showCorrectAnswer) {
+          check.className =
+            "w-4 h-4 bg-purple-600 rounded flex items-center justify-center border border-purple-600 transition-colors";
+          check.innerHTML =
+            '<i class="fa-solid fa-check text-white text-[10px]"></i>';
+        } else {
+          check.className =
+            "w-4 h-4 bg-white rounded flex items-center justify-center border border-gray-400 transition-colors";
+          check.innerHTML = "";
+        }
+        renderDetailCard();
+      }
+
+      // Toggle Function: Jawaban Kamu
+      function toggleUserAnswer() {
+        showUserAnswer = !showUserAnswer;
+        const check = document.getElementById("check-user");
+        if (showUserAnswer) {
+          check.className =
+            "w-4 h-4 bg-purple-600 rounded flex items-center justify-center border border-purple-600 transition-colors";
+          check.innerHTML =
+            '<i class="fa-solid fa-check text-white text-[10px]"></i>';
+        } else {
+          check.className =
+            "w-4 h-4 bg-white rounded flex items-center justify-center border border-gray-400 transition-colors";
+          check.innerHTML = "";
+        }
+        renderDetailCard();
+      }
+
+      function renderDetailCard() {
+        const ans = sortedAnswers[currentDetailIndex];
+
+        document.getElementById("detail-nav-title").innerText =
+          `Question ${ans.questionNum}`;
+        const navIcon = document.getElementById("detail-nav-icon");
+        if (ans.isCorrect) {
+          navIcon.className =
+            "w-6 h-6 rounded bg-emerald-500 text-white flex items-center justify-center";
+          navIcon.innerHTML = '<i class="fa-solid fa-check text-xs"></i>';
+        } else {
+          navIcon.className =
+            "w-6 h-6 rounded bg-red-500 text-white flex items-center justify-center";
+          navIcon.innerHTML = '<i class="fa-solid fa-xmark text-xs"></i>';
+        }
+
+        document.getElementById("detail-time").innerHTML =
+          `<i class="fa-regular fa-clock"></i> ${ans.time}s`;
+        const ptsText = document.getElementById("detail-pts");
+        if (ans.isCorrect) {
+          ptsText.innerHTML =
+            '<i class="fa-regular fa-circle-check text-emerald-500"></i> 1/1 pts';
+          ptsText.classList.replace("text-gray-500", "text-gray-800");
+          document.getElementById("detail-score-txt").innerText = "10";
+        } else {
+          ptsText.innerHTML =
+            '<i class="fa-regular fa-circle-xmark text-red-500"></i> 0/1 pts';
+          ptsText.classList.replace("text-gray-800", "text-gray-500");
+          document.getElementById("detail-score-txt").innerText = "0";
+        }
+
+        document.getElementById("detail-question").innerText =
+          `${ans.questionNum}. ${ans.questionText}`;
+
+        const optContainer = document.getElementById(
+          "detail-options-container",
+        );
+        optContainer.innerHTML = "";
+
+        ans.options.forEach((optText, optIndex) => {
+          const isUserPick = optIndex === ans.selectedIndex;
+          const isCorrectAnswer = optIndex === ans.correctIndex;
+
+          let boxClass = "detail-opt-box";
+          let iconHtml = `<div class="w-5 h-5 rounded-full bg-gray-200 flex-shrink-0 mt-0.5"></div>`;
+          let contentHtml = `<span class="text-[14px] text-gray-600 leading-snug block">${optText}</span>`;
+
+          // Logika penerapan UI berdasarkan toggle filter
+          if (isCorrectAnswer && showCorrectAnswer) {
+            boxClass += " correct-bg";
+            iconHtml = `<div class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fa-solid fa-check text-[10px]"></i></div>`;
+            contentHtml = `<span class="text-[14px] text-gray-800 font-medium leading-snug block">${optText}</span>`;
+          }
+
+          if (isUserPick && showUserAnswer) {
+            if (isCorrectAnswer && showCorrectAnswer) {
+              contentHtml =
+                `<div class="text-[11px] text-emerald-500 font-bold uppercase mb-1">Your Answer</div>` +
+                contentHtml;
+            } else if (isCorrectAnswer && !showCorrectAnswer) {
+              contentHtml = `<div class="text-[11px] text-emerald-500 font-bold uppercase mb-1">Your Answer</div><span class="text-[14px] text-gray-800 font-medium leading-snug block">${optText}</span>`;
+            } else {
+              iconHtml = `<div class="w-5 h-5 rounded-full border-[3px] border-red-500 flex-shrink-0 mt-0.5"></div>`;
+              contentHtml = `<div class="text-[11px] text-red-500 font-bold uppercase mb-1">Your Answer <i class="fa-solid fa-xmark ml-0.5 text-[10px]"></i></div><span class="text-[14px] text-gray-800 font-medium leading-snug block">${optText}</span>`;
+            }
+          }
+
+          const box = document.createElement("div");
+          box.className = boxClass;
+          box.innerHTML = `
+                    ${iconHtml}
+                    <div class="flex-grow pt-0.5">
+                        ${contentHtml}
+                    </div>
+                `;
+          optContainer.appendChild(box);
+        });
+
+        const btnPrev = document.getElementById("btn-prev");
+        const btnNext = document.getElementById("btn-next");
+
+        btnPrev.disabled = currentDetailIndex === 0;
+        btnNext.disabled = currentDetailIndex === sortedAnswers.length - 1;
+
+        if (currentDetailIndex === 0) {
+          btnPrev.classList.replace("bg-purple-600", "bg-gray-300");
+        } else {
+          btnPrev.classList.replace("bg-gray-300", "bg-purple-600");
+        }
+      }
+
+      function saveToDatabase() {
+        const resultData = {
+          nama: studentData.name,
+          absen: studentData.absen,
+          kelas: studentData.kelas,
+          skor: score,
+          waktu: new Date().toLocaleString("id-ID"),
+        };
+
+        let db = JSON.parse(localStorage.getItem("quizDB")) || [];
+        db.push(resultData);
+        localStorage.setItem("quizDB", JSON.stringify(db));
+      }
+    </script>
+  </body>
+</html>
