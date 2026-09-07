@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Makalah PABP - Syu'abul Iman</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Arab saja (Times New Roman sudah bawaan sistem) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS untuk Format Makalah Resmi -->
+    <style>
+      body {
+        background-color: #f3f4f6;
+        /* Jenis Font: Times New Roman */
+        font-family: "Times New Roman", Times, serif;
+        scroll-behavior: smooth;
+        color: #000000;
+      }
+
+      .arabic-text {
+        font-family: "Amiri", serif;
+      }
+
+      .paper-container {
+        background-color: white;
+        /* Ukuran Kertas: A4 (21cm x 29.7cm) */
+        max-width: 21cm;
+        min-height: 29.7cm;
+        margin: 2rem auto;
+
+        /* Ukuran Font Isi: 12 pt & Spasi: 1,5 */
+        font-size: 12pt;
+        line-height: 1.5;
+
+        /* Margin Kertas: Atas 3cm, Kanan 3cm, Bawah 3cm, Kiri 4cm */
+        padding: 3cm 3cm 3cm 4cm;
+
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+      }
+
+      /* Penyesuaian agar tetap nyaman dibaca di layar HP (Responsive) */
+      @media (max-width: 768px) {
+        .paper-container {
+          padding: 1.5rem; /* Mengabaikan margin 4-3-3-3 khusus untuk HP */
+          margin: 0;
+          width: 100%;
+        }
+      }
+
+      /* Memastikan paragraf & list turunannya patuh ke aturan 12pt */
+      p,
+      li,
+      td,
+      th {
+        font-size: 12pt;
+      }
+
+      .gs-reveal {
+        visibility: hidden;
+      }
+    </style>
+  </head>
+  <body class="antialiased selection:bg-blue-200 selection:text-blue-900">
+    <main class="paper-container overflow-hidden rounded-none sm:rounded-sm">
+      <!-- ================= COVER PAGE ================= -->
+      <section
+        class="gs-reveal flex flex-col items-center justify-center text-center min-h-[85vh] border-b-2 border-gray-300 pb-12 mb-12"
+      >
+        <!-- Judul Makalah -->
+        <div class="mb-10 w-full">
+          <h1 class="text-[14pt] font-bold uppercase mb-1">MAKALAH PABP</h1>
+          <h2 class="text-[14pt] font-bold uppercase mb-1">SYUABUL IMAN</h2>
+          <p class="font-bold">
+            (Memenuhi Janji, Mensyukuri Nikmat, Menjaga Lisan Dan Menutup Aib)
+          </p>
+        </div>
+
+        <!-- Tujuan Penyusunan -->
+        <div class="mb-10 w-full">
+          <p>Disusun guna memenuhi tugas mata pelajaran</p>
+          <p class="font-bold uppercase mt-1">PABP</p>
+        </div>
+
+        <!-- Guru Pengampu -->
+        <div class="mb-10 w-full">
+          <p class="font-bold">Guru Pengampu :</p>
+          <p>Miftahudin, S.Pd I</p>
+        </div>
+
+        <!-- Logo Cover -->
+        <img
+          src="LOGO_SMK5y.png"
+          alt="Logo SMKN 5"
+          class="w-32 sm:w-40 md:w-48 mb-8 object-contain"
+        />
+
+        <!-- Kelas (Dikembalikan ke atas daftar penyusun) -->
+        <p class="font-bold mb-10 text-[14pt] uppercase">Kelas X KA 2</p>
+
+        <!-- Section Penyusun (Rata Tengah + Teks Kiri bernomor) -->
+        <div class="mb-12 flex flex-col items-center w-full">
+          <!-- Teks diubah sesuai permintaan -->
+          <p class="mb-4 italic">Di susun oleh kelompok 3 :</p>
+          <div class="inline-block text-left">
+            <ol
+              class="list-decimal list-outside ml-5 space-y-1 font-bold uppercase"
+            >
+              <li>Riska Noviansyah Prastowo</li>
+              <li>Shifwah Syahirah</li>
+              <li>Renata Taruli Dzakira</li>
+              <li>Ayesha Zahira Syaifulloh</li>
+              <li>Azka Rifal Syaihan</li>
+              <li>Aura Rahmadani</li>
+              <li>Aida Husnia Donita</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Footer Cover -->
+        <div
+          class="mt-auto uppercase font-bold text-[12pt] leading-relaxed w-full pt-8"
+        >
+          <p>PROGRAM STUDI KIMIA ANALISIS</p>
+          <p>SEKOLAH MENENGAH KEJURUAN NEGERI 5 KOTA</p>
+          <p>BEKASI</p>
+          <p>TAHUN AJARAN 2026/2027</p>
+        </div>
+      </section>
+
+      <!-- ================= KATA PENGANTAR ================= -->
+      <section id="kata-pengantar" class="gs-reveal mb-12">
+        <h2 class="text-[14pt] font-bold text-center mb-6 uppercase">
+          Kata Pengantar
+        </h2>
+        <div class="space-y-4 text-justify indent-8">
+          <p>
+            Puji syukur kehadirat Allah Swt. Atas segala rahmat dan karunia-Nya
+            sehingga penulis dapat menyelesaikan makalah yang berjudul “Syu’abul
+            Iman: Memenuhi Janji, Mensyukuri Nikmat, Menjaga Lisan, dan Menutup
+            Aib” dengan baik.
+          </p>
+          <p>
+            Makalah ini disusun untuk memenuhi tugas mata pelajaran Pendidikan
+            Agama Islam yang dibimbing oleh Pak Miftah Udin S, Pd. Selain itu,
+            makalah ini bertujuan untuk menambah pengetahuan dan pemahaman
+            mengenai syu’abul iman serta penerapannya dalam kehidupan
+            sehari-hari.
+          </p>
+          <p>
+            Dalam makalah ini, penulis membahas pengertian syu’abul iman serta
+            beberapa cabangnya, yaitu memenuhi janji, mensyukuri nikmat, menjaga
+            lisan, dan menutup aib. Nilai-nilai tersebut penting untuk
+            diterapkan agar kita dapat menjadi pribadi yang bertanggung jawab,
+            bersyukur, menjaga perkataan, dan menghargai orang lain.
+          </p>
+          <p>
+            Penulis menyadari bahwa makalah ini masih memiliki kekurangan. Oleh
+            karena itu, penulis mengharapkan kritik dan saran yang membangun
+            untuk perbaikan di masa mendatang.
+          </p>
+          <p>
+            Semoga makalah ini dapat memberikan manfaat dan menambah wawasan
+            bagi penulis maupun pembaca.
+          </p>
+          <div class="text-right mt-8 indent-0">
+            <p>Bekasi, 31 Agustus 2026</p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="my-12 border-gray-300 gs-reveal" />
+
+      <!-- ================= DAFTAR ISI ================= -->
+      <section id="daftar-isi" class="gs-reveal mb-12">
+        <h2 class="text-[14pt] font-bold text-center mb-6 uppercase">
+          Daftar Isi
+        </h2>
+        <ul class="space-y-2 max-w-2xl mx-auto">
+          <li
+            class="flex justify-between border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>KATA PENGANTAR</span> <span>i</span>
+          </li>
+          <li
+            class="flex justify-between border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>DAFTAR ISI</span> <span>ii</span>
+          </li>
+          <li
+            class="flex justify-between border-b border-gray-200 border-dotted pb-1 mt-4"
+          >
+            <span><strong>BAB I PENDAHULUAN</strong></span>
+            <span><strong>1</strong></span>
+          </li>
+          <li
+            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>Latar Belakang</span> <span>1</span>
+          </li>
+          <li
+            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>Rumusan Masalah</span> <span>1</span>
+          </li>
+          <li
+            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>Tujuan</span> <span>2</span>
+          </li>
+          <li
+            class="flex justify-between border-b border-gray-200 border-dotted pb-1 mt-4"
+          >
+            <span><strong>BAB II PEMBAHASAN</strong></span>
+            <span><strong>2</strong></span>
+          </li>
+          <li
+            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>Pengertian Syu’abul Iman</span> <span>2</span>
+          </li>
+          <li
+            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>Memenuhi Janji</span> <span>3</span>
+          </li>
+          <li
+            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>Mensyukuri Nikmat</span> <span>3</span>
+          </li>
+          <li
+            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>Menjaga Lisan</span> <span>4</span>
+          </li>
+          <li
+            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>Menutup Aib</span> <span>5</span>
+          </li>
+          <li
+            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>Penerapan Syu’abul Iman...</span> <span>6</span>
+          </li>
+          <li
+            class="flex justify-between border-b border-gray-200 border-dotted pb-1 mt-4"
+          >
+            <span><strong>BAB III PENUTUP</strong></span>
+            <span><strong>7</strong></span>
+          </li>
+          <li
+            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>Kesimpulan</span> <span>7</span>
+          </li>
+          <li
+            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>Saran</span> <span>8</span>
+          </li>
+          <li
+            class="flex justify-between pl-4 border-b border-gray-200 border-dotted pb-1"
+          >
+            <span>Daftar Pustaka</span> <span>8</span>
+          </li>
+        </ul>
+      </section>
+
+      <hr class="my-12 border-gray-300 gs-reveal" />
+
+      <!-- ================= BAB I ================= -->
+      <section id="bab-1" class="gs-reveal mb-12 text-justify">
+        <div class="text-center mb-6">
+          <h2 class="text-[14pt] font-bold uppercase">BAB I</h2>
+          <h3 class="text-[14pt] font-bold uppercase mt-1">Pendahuluan</h3>
+        </div>
+
+        <div class="gs-reveal mb-6">
+          <h4 class="font-bold mb-2">1. Latar Belakang</h4>
+          <p class="indent-8 mb-2">
+            Iman merupakan dasar yang sangat penting dalam kehidupan seorang
+            muslim. Iman tidak hanya berupa keyakinan di dalam hati, tetapi juga
+            harus diwujudkan melalui perkataan dan perbuatan. Salah satu bentuk
+            penerapan iman adalah dengan menjalankan syu’abul iman atau
+            cabang-cabang iman.
+          </p>
+          <p class="indent-8 mb-2">
+            Syu’abul iman mencakup berbagai perilaku yang mencerminkan keimanan
+            seseorang. Di antaranya adalah memenuhi janji, mensyukuri nikmat,
+            menjaga lisan, dan menutup aib. Keempat hal tersebut sangat penting
+            untuk diterapkan dalam kehidupan sehari-hari karena dapat membentuk
+            pribadi yang bertanggung jawab, bersyukur, santun, dan menjaga
+            kehormatan orang lain.
+          </p>
+          <p class="indent-8">
+            Pada zaman sekarang, menjaga perilaku tersebut menjadi semakin
+            penting. Kemudahan berkomunikasi melalui media sosial membuat
+            seseorang harus lebih berhati-hati dalam berbicara dan menyebarkan
+            informasi. Oleh karena itu, pemahaman tentang syu’abul iman perlu
+            ditanamkan agar seorang muslim dapat menjalani kehidupan sesuai
+            dengan ajaran Islam.
+          </p>
+        </div>
+
+        <div class="gs-reveal mb-6">
+          <h4 class="font-bold mb-2">2. Rumusan Masalah</h4>
+          <ol class="list-decimal pl-6 space-y-1">
+            <li>Apa yang dimaksud dengan syu’abul iman?</li>
+            <li>Apa pengertian dan pentingnya memenuhi janji?</li>
+            <li>Apa pengertian dan cara mensyukuri nikmat?</li>
+            <li>Mengapa seorang muslim harus menjaga lisan?</li>
+            <li>Apa yang dimaksud dengan menutup aib?</li>
+            <li>
+              Bagaimana penerapan syu’abul iman dalam kehidupan sehari-hari?
+            </li>
+          </ol>
+        </div>
+
+        <div class="gs-reveal mb-6">
+          <h4 class="font-bold mb-2">3. Tujuan</h4>
+          <ol class="list-decimal pl-6 space-y-1">
+            <li>Mengetahui pengertian syu’abul iman.</li>
+            <li>Memahami pentingnya memenuhi janji.</li>
+            <li>Mengetahui cara mensyukuri nikmat Allah Swt.</li>
+            <li>Memahami pentingnya menjaga lisan.</li>
+            <li>
+              Mengetahui pentingnya menutup aib diri sendiri dan orang lain.
+            </li>
+            <li>
+              Menerapkan nilai-nilai syu’abul iman dalam kehidupan sehari-hari.
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ================= BAB II ================= -->
+      <section id="bab-2" class="mb-12 text-justify">
+        <div class="text-center mb-6 gs-reveal mt-12">
+          <h2 class="text-[14pt] font-bold uppercase">BAB II</h2>
+          <h3 class="text-[14pt] font-bold uppercase mt-1">Pembahasan</h3>
+        </div>
+
+        <div class="gs-reveal mb-6">
+          <h4 class="font-bold mb-2">1. Pengertian Syu’abul Iman</h4>
+          <p class="indent-8 mb-2">
+            Secara bahasa, syu’abul iman berarti cabang-cabang iman. Syu’abul
+            iman merupakan berbagai bentuk perilaku, perkataan, dan perbuatan
+            yang menjadi bagian dari keimanan seorang muslim.
+          </p>
+          <p class="indent-8 mb-2">
+            Iman tidak cukup hanya diyakini dalam hati, tetapi harus dibuktikan
+            melalui perilaku. Seseorang yang memiliki iman akan berusaha
+            melakukan perbuatan yang baik dan menjauhi perbuatan yang dilarang
+            oleh Allah Swt.
+          </p>
+          <p class="indent-8 mb-2">
+            Salah satu hadis menjelaskan bahwa iman memiliki banyak cabang.
+            Rasulullah saw. Bersabda:
+          </p>
+          <blockquote class="italic text-center my-4 ml-8 mr-8">
+            “Iman memiliki lebih dari enam puluh cabang…” <br />
+            <span class="not-italic">(HR. Bukhari dan Muslim)</span>
+          </blockquote>
+          <p class="indent-8">
+            Dari hadis tersebut dapat dipahami bahwa iman memiliki banyak bentuk
+            penerapan dalam kehidupan. Memenuhi janji, bersyukur, menjaga lisan,
+            dan menutup aib merupakan contoh perilaku yang mencerminkan
+            keimanan.
+          </p>
+        </div>
+
+        <div class="gs-reveal mb-6">
+          <h4 class="font-bold mb-2">2. Memenuhi Janji</h4>
+
+          <h5 class="font-bold mt-4 mb-2">A. Pengertian Memenuhi Janji</h5>
+          <p class="indent-8 mb-2">
+            Janji adalah suatu kesanggupan yang diucapkan seseorang untuk
+            melakukan sesuatu. Memenuhi janji berarti melaksanakan apa yang
+            telah disepakati atau diucapkan kepada orang lain.
+          </p>
+          <p class="indent-8 mb-2">
+            Islam mengajarkan umatnya untuk menjadi orang yang dapat dipercaya.
+            Sebaliknya, mengingkari janji tanpa alasan yang dibenarkan dapat
+            merusak kepercayaan orang lain.
+          </p>
+          <p class="indent-8 mb-4">
+            Allah Swt. Berfirman dalam QS. Al-Isra’ ayat 34:
+          </p>
+
+          <div class="my-6 text-center gs-reveal px-4">
+            <p
+              dir="rtl"
+              lang="ar"
+              class="arabic-text text-2xl text-right leading-loose mb-4"
+            >
+              وَلَا تَقْرَبُوا مَالَ الْيَتِيمِ إِلَّا بِالَّتِي هِيَ أَحْسَنُ
+              حَتَّىٰ يَبْلُغَ أَشُدَّهُ ۚ وَأَوْفُوا بِالْعَهْدِ ۖ إِنَّ
+              الْعَهْدَ كَانَ مَسْئُولًا
+            </p>
+            <p class="italic text-justify">
+              Artinya: “Dan janganlah kamu mendekati harta anak yatim, kecuali
+              dengan cara yang lebih baik (bermanfaat) sampai dia dewasa, dan
+              penuhilah janji, karena janji itu pasti diminta
+              pertanggungjawabannya.”
+            </p>
+          </div>
+
+          <h5 class="font-bold mt-4 mb-2">B. Contoh Memenuhi Janji</h5>
+          <ul class="list-disc pl-8 mb-4 space-y-1">
+            <li>Mengerjakan tugas kelompok sesuai kesepakatan.</li>
+            <li>Datang tepat waktu ketika sudah berjanji.</li>
+            <li>
+              Mengembalikan barang yang telah dipinjam sesuai waktu yang
+              disepakati.
+            </li>
+            <li>Menepati janji kepada orang tua, guru, dan teman.</li>
+            <li>Melaksanakan tanggung jawab yang telah disanggupi.</li>
+          </ul>
+
+          <h5 class="font-bold mt-4 mb-2">C. Hikmah Memenuhi Janji</h5>
+          <p class="indent-8">
+            Memenuhi janji dapat membuat seseorang dipercaya oleh orang lain,
+            melatih sikap bertanggung jawab, serta menciptakan hubungan yang
+            baik dengan sesama.
+          </p>
+        </div>
+
+        <div class="gs-reveal mb-6">
+          <h4 class="font-bold mb-2">3. Mensyukuri Nikmat</h4>
+
+          <h5 class="font-bold mt-4 mb-2">A. Pengertian Mensyukuri Nikmat</h5>
+          <p class="indent-8 mb-2">
+            Nikmat adalah segala sesuatu yang diberikan Allah Swt. Kepada
+            manusia, baik berupa kesehatan, keluarga, ilmu, rezeki, waktu,
+            maupun kesempatan.
+          </p>
+          <p class="indent-8 mb-2">
+            Mensyukuri nikmat berarti menyadari bahwa segala nikmat berasal dari
+            Allah Swt. Dan menggunakannya untuk melakukan hal-hal yang baik.
+          </p>
+          <p class="indent-8 mb-4">
+            Allah Swt. Berfirman dalam QS. Ibrahim ayat 7:
+          </p>
+
+          <div class="my-6 text-center gs-reveal px-4">
+            <p
+              dir="rtl"
+              lang="ar"
+              class="arabic-text text-2xl text-right leading-loose mb-4"
+            >
+              وَإِذْ تَأَذَّنَ رَبُّكُمْ لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ ۖ
+              وَلَئِن كَفَرْتُمْ إِنَّ عَذَابِي لَشَدِيدٌ
+            </p>
+            <p class="italic text-justify">
+              Artinya: “Dan (ingatlah) ketika Tuhanmu memaklumkan, ‘Sesungguhnya
+              jika kamu bersyukur, niscaya Aku akan menambah (nikmat) kepadamu,
+              tetapi jika kamu mengingkari (nikmat-Ku), maka pasti azab-Ku
+              sangat berat.’”
+            </p>
+          </div>
+
+          <h5 class="font-bold mt-4 mb-2">B. Cara Mensyukuri Nikmat</h5>
+          <p class="indent-8 mb-2">Syukur dapat dilakukan melalui:</p>
+          <ul class="list-disc pl-8 mb-2 space-y-1">
+            <li>Hati, yaitu menyadari bahwa nikmat berasal dari Allah Swt.</li>
+            <li>
+              Lisan, yaitu mengucapkan “Alhamdulillah” dan memuji Allah Swt.
+            </li>
+            <li>Perbuatan, yaitu menggunakan nikmat untuk kebaikan.</li>
+          </ul>
+          <p class="indent-8">
+            Contohnya adalah menggunakan kesehatan untuk belajar dan beribadah,
+            menggunakan ilmu untuk membantu orang lain, serta menjaga dan tidak
+            menyia-nyiakan fasilitas yang dimiliki.
+          </p>
+
+          <h5 class="font-bold mt-4 mb-2">C. Hikmah Bersyukur</h5>
+          <p class="indent-8">
+            Bersyukur dapat membuat hati menjadi lebih tenang, menyadarkan
+            manusia untuk tidak mudah mengeluh, serta mendorong seseorang
+            menggunakan nikmat dengan sebaik-baiknya.
+          </p>
+        </div>
+
+        <div class="gs-reveal mb-6">
+          <h4 class="font-bold mb-2">4. Menjaga Lisan</h4>
+
+          <h5 class="font-bold mt-4 mb-2">A. Pengertian Menjaga Lisan</h5>
+          <p class="indent-8 mb-2">
+            Menjaga lisan berarti berhati-hati dalam berbicara dan menghindari
+            perkataan yang dapat menyakiti atau merugikan orang lain.
+          </p>
+          <p class="indent-8 mb-2">Rasulullah saw. bersabda:</p>
+          <blockquote class="italic text-center my-4 ml-8 mr-8">
+            “Barang siapa beriman kepada Allah dan hari akhir, hendaklah ia
+            berkata baik atau diam.”<br /><span class="not-italic"
+              >(HR. Bukhari dan Muslim)</span
+            >
+          </blockquote>
+          <p class="indent-8 mb-4">
+            Hadis tersebut mengajarkan bahwa seorang muslim harus memperhatikan
+            perkataannya.
+          </p>
+
+          <h5 class="font-bold mt-4 mb-2">B. Contoh Menjaga Lisan</h5>
+          <ul class="list-disc pl-8 mb-4 space-y-1">
+            <li>Tidak menghina atau mengejek orang lain.</li>
+            <li>
+              Tidak menyebarkan fitnah dan berita yang belum diketahui
+              kebenarannya.
+            </li>
+            <li>Tidak berkata kasar.</li>
+            <li>Tidak membicarakan keburukan orang lain.</li>
+            <li>Berbicara dengan sopan kepada guru, orang tua, dan teman.</li>
+            <li>
+              Berpikir terlebih dahulu sebelum berbicara atau mengirim sesuatu
+              di media sosial.
+            </li>
+          </ul>
+
+          <h5 class="font-bold mt-4 mb-2">C. Hikmah Menjaga Lisan</h5>
+          <p class="indent-8">
+            Menjaga lisan dapat menghindarkan seseorang dari konflik, menjaga
+            perasaan orang lain, dan menciptakan hubungan yang lebih baik.
+            Selain itu, seseorang akan lebih dipercaya karena perkataannya dapat
+            dipertanggungjawabkan.
+          </p>
+        </div>
+
+        <div class="gs-reveal mb-6">
+          <h4 class="font-bold mb-2">5. Menutup Aib</h4>
+
+          <h5 class="font-bold mt-4 mb-2">A. Pengertian Menutup Aib</h5>
+          <p class="indent-8 mb-2">
+            Aib adalah sesuatu yang buruk atau kekurangan yang terdapat pada
+            seseorang dan tidak seharusnya disebarluaskan kepada orang lain.
+          </p>
+          <p class="indent-8 mb-2">
+            Menutup aib berarti tidak membuka atau menyebarkan kekurangan dan
+            kesalahan seseorang yang tidak perlu diketahui orang lain, selama
+            hal tersebut tidak berkaitan dengan tindakan yang membahayakan atau
+            membutuhkan pertolongan.
+          </p>
+          <p class="indent-8 mb-2">Rasulullah saw. Bersabda:</p>
+          <blockquote class="italic text-center my-4 ml-8 mr-8">
+            “Barang siapa menutupi aib seorang muslim, Allah akan menutupi
+            aibnya di dunia dan akhirat.”<br /><span class="not-italic"
+              >(HR. Muslim)</span
+            >
+          </blockquote>
+
+          <h5 class="font-bold mt-4 mb-2">B. Contoh Menutup Aib</h5>
+          <ul class="list-disc pl-8 mb-2 space-y-1">
+            <li>Tidak menyebarkan kesalahan teman kepada orang lain.</li>
+            <li>Tidak membicarakan kekurangan seseorang di media sosial.</li>
+            <li>
+              Tidak menyebarkan foto atau cerita pribadi orang lain tanpa izin.
+            </li>
+            <li>Menasihati teman secara pribadi ketika melakukan kesalahan.</li>
+            <li>Tidak menjadikan kesalahan orang lain sebagai bahan ejekan.</li>
+          </ul>
+          <p class="indent-8 mt-2">
+            Menutup aib bukan berarti membiarkan perbuatan yang membahayakan.
+            Jika seseorang mengalami masalah serius atau berada dalam bahaya,
+            kita sebaiknya mencari bantuan dari orang dewasa yang dapat
+            dipercaya.
+          </p>
+
+          <h5 class="font-bold mt-4 mb-2">C. Hikmah Menutup Aib</h5>
+          <p class="indent-8">
+            Menutup aib dapat menjaga kehormatan seseorang, mempererat
+            persaudaraan, dan menghindarkan terjadinya permusuhan. Sikap ini
+            juga mengajarkan kita untuk tidak mudah menghakimi orang lain.
+          </p>
+        </div>
+
+        <div class="gs-reveal mt-12">
+          <h4 class="font-bold mb-4 text-center">
+            Penerapan Syu'abul Iman dalam Kehidupan Sehari-hari
+          </h4>
+          <p class="indent-8 mb-6">
+            Syu’abul iman dapat diterapkan dalam berbagai lingkungan, baik di
+            rumah, sekolah, maupun masyarakat. Penerapannya dapat dilakukan
+            melalui kebiasaan sederhana dalam kehidupan sehari-hari, seperti
+            memenuhi janji kepada orang lain, mensyukuri berbagai nikmat yang
+            diberikan Allah Swt., menjaga perkataan saat berkomunikasi, serta
+            tidak menyebarkan aib atau kekurangan orang lain. Dengan membiasakan
+            perilaku tersebut, kita dapat menunjukkan bahwa keimanan tidak hanya
+            terdapat dalam hati, tetapi juga tercermin melalui sikap dan
+            perbuatan. Penerapan syu’abul iman juga dapat membantu menciptakan
+            hubungan yang harmonis, menumbuhkan rasa saling menghargai, serta
+            membentuk pribadi yang memiliki akhlak terpuji.
+          </p>
+
+          <!-- Responsif Tabel -->
+          <div class="overflow-x-auto my-8">
+            <table
+              class="w-full text-left border-collapse border border-black min-w-full"
+            >
+              <thead>
+                <tr class="bg-gray-100">
+                  <th class="border border-black p-3 uppercase text-center">
+                    Syu’abul Iman
+                  </th>
+                  <th class="border border-black p-3 uppercase text-center">
+                    Contoh Penerapan
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="border border-black p-3 font-bold text-center">
+                    Memenuhi Janji
+                  </td>
+                  <td class="border border-black p-3">
+                    Menyelesaikan tugas sesuai kesepakatan
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border border-black p-3 font-bold text-center">
+                    Mensyukuri Nikmat
+                  </td>
+                  <td class="border border-black p-3">
+                    Mengucapkan Alhamdulillah dan menggunakan nikmat untuk
+                    kebaikan
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border border-black p-3 font-bold text-center">
+                    Menjaga Lisan
+                  </td>
+                  <td class="border border-black p-3">
+                    Berbicara sopan dan tidak menyebarkan fitnah
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border border-black p-3 font-bold text-center">
+                    Menutup Aib
+                  </td>
+                  <td class="border border-black p-3">
+                    Tidak menyebarkan kekurangan atau kesalahan teman
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="indent-8">
+            Dengan menerapkan keempat perilaku tersebut dalam kehidupan
+            sehari-hari, seorang muslim dapat menjadi pribadi yang lebih
+            bertanggung jawab, bersyukur, santun, dan menghargai orang lain.
+            Selain itu, penerapan syu’abul iman juga dapat membantu menciptakan
+            hubungan yang baik dengan keluarga, teman, guru, dan masyarakat.
+            Dengan membiasakan diri memenuhi janji, mensyukuri nikmat, menjaga
+            lisan, serta menutup aib, kita dapat meningkatkan kualitas keimanan
+            sekaligus membentuk akhlak yang baik sesuai dengan ajaran.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= BAB III ================= -->
+      <section id="bab-3" class="mb-12 text-justify">
+        <div class="text-center mb-6 gs-reveal mt-12">
+          <h2 class="text-[14pt] font-bold uppercase">BAB III</h2>
+          <h3 class="text-[14pt] font-bold uppercase mt-1">Penutup</h3>
+        </div>
+
+        <div class="gs-reveal mb-6">
+          <h4 class="font-bold mb-2">1. Kesimpulan</h4>
+          <p class="indent-8 mb-2">
+            Syu’abul iman merupakan cabang-cabang iman yang diwujudkan melalui
+            berbagai perkataan dan perbuatan dalam kehidupan sehari-hari.
+            Memenuhi janji, mensyukuri nikmat, menjaga lisan, dan menutup aib
+            merupakan contoh perilaku yang mencerminkan keimanan.
+          </p>
+          <p class="indent-8 mb-2">
+            Memenuhi janji mengajarkan kita untuk bertanggung jawab dan dapat
+            dipercaya. Mensyukuri nikmat mengajarkan kita untuk menyadari dan
+            menggunakan pemberian Allah Swt. Dengan baik. Menjaga lisan
+            mengajarkan kita untuk berhati-hati dalam berbicara agar tidak
+            menyakiti orang lain. Sementara itu, menutup aib mengajarkan kita
+            untuk menjaga kehormatan dan privasi orang lain.
+          </p>
+          <p class="indent-8">
+            Dengan menerapkan keempat sikap tersebut dalam kehidupan
+            sehari-hari, kita dapat menjadi pribadi yang lebih baik serta
+            menjalankan ajaran Islam dengan lebih baik.
+          </p>
+        </div>
+
+        <div class="gs-reveal mb-6">
+          <h4 class="font-bold mb-2">2. Saran</h4>
+          <p class="indent-8 mb-2">
+            Sebagai seorang muslim, kita sebaiknya terus berusaha menerapkan
+            syu’abul iman dalam kehidupan sehari-hari. Hal tersebut dapat
+            dimulai dari hal-hal sederhana, seperti memenuhi janji kepada orang
+            lain, selalu mensyukuri nikmat yang diberikan Allah Swt., menjaga
+            perkataan agar tidak menyakiti orang lain, serta menutup aib dan
+            menjaga kehormatan sesama.
+          </p>
+          <p class="indent-8">
+            Selain itu, kita juga diharapkan dapat membiasakan perilaku tersebut
+            di lingkungan keluarga, sekolah, maupun masyarakat. Dengan
+            menerapkan syu’abul iman secara konsisten, diharapkan kita dapat
+            menjadi pribadi yang lebih bertanggung jawab, bersyukur, santun, dan
+            memiliki akhlak yang baik sesuai dengan ajaran Islam.
+          </p>
+        </div>
+      </section>
+
+      <hr class="my-12 border-gray-300 gs-reveal" />
+
+      <!-- ================= DAFTAR PUSTAKA ================= -->
+      <section id="daftar-pustaka" class="gs-reveal pb-12">
+        <h2 class="text-[14pt] font-bold mb-6 uppercase text-center">
+          Daftar Pustaka
+        </h2>
+        <ul class="space-y-2 pl-8 list-disc max-w-3xl mx-auto">
+          <li>Al-Qur’an dan Terjemahannya.</li>
+          <li>
+            Kementerian Agama Republik Indonesia. Al-Qur’an dan Terjemahannya.
+          </li>
+          <li>
+            Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi. Pendidikan
+            Agama Islam dan Budi Pekerti.
+          </li>
+          <li>Bukhari, Imam. Shahih Bukhari.</li>
+          <li>Muslim, Imam. Shahih Muslim.</li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- GSAP & ScrollTrigger Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+      const reveals = gsap.utils.toArray(".gs-reveal");
+
+      reveals.forEach((elem) => {
+        gsap.fromTo(
+          elem,
+          { autoAlpha: 0, y: 50 },
+          {
+            duration: 1.2,
+            autoAlpha: 1,
+            y: 0,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: elem,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          },
+        );
+      });
+    </script>
+  </body>
+</html>
